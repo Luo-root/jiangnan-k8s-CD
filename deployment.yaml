@@ -1,0 +1,18 @@
+# pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: go-k8s-api-demo
+  namespace: default
+spec:
+  serviceAccountName: default  # 关联上面配置的服务账号
+  containers:
+    - name: go-k8s-api-demo
+      image: your-go-image:latest  # 替换为你的 Go 程序镜像
+      resources:
+        limits:
+          cpu: "100m"
+          memory: "128Mi"
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
