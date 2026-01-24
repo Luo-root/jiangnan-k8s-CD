@@ -2,9 +2,9 @@ package apply
 
 import (
 	"fmt"
-	"k8s_CICD/k8s_client/command/apply/deployment"
+	"k8s_CICD/k8s_client/command_operation/apply/deployment"
 	"k8s_CICD/k8s_client/config"
-	"k8s_CICD/model/kube_param/command"
+	"k8s_CICD/model/kube_param/command_model"
 )
 
 func KubeApply(param *command_model.ApplyParameter) error {

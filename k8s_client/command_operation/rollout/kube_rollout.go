@@ -2,9 +2,9 @@ package rollout
 
 import (
 	"fmt"
-	"k8s_CICD/k8s_client/command/rollout/deployment"
+	"k8s_CICD/k8s_client/command_operation/rollout/deployment"
 	"k8s_CICD/k8s_client/config"
-	"k8s_CICD/model/kube_param/command"
+	"k8s_CICD/model/kube_param/command_model"
 	"time"
 )
 

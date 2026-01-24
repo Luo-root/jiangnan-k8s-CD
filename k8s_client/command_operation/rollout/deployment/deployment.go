@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"k8s_CICD/k8s_client/command/get/deployment"
+	"k8s_CICD/k8s_client/command_operation/get/deployment"
 	"time"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
