@@ -3,14 +3,14 @@ package handler
 import (
 	"k8s_CICD/api/service"
 	"k8s_CICD/model"
-	"k8s_CICD/model/kube_param/command_model"
+	"k8s_CICD/model/kube_param"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
 func Apply(c *gin.Context) {
-	var parameter command_model.ApplyParameter
+	var parameter kube_param.ApplyParameter
 	if err := c.ShouldBindJSON(&parameter); err != nil {
 		c.JSON(http.StatusOK, model.Response{
 			Code: model.ParameterFail,
