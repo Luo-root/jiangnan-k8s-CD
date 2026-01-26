@@ -17,6 +17,7 @@ func Apply(c *gin.Context) {
 			Msg:  "【apply参数不匹配】" + err.Error(),
 			Data: nil,
 		})
+		return
 	}
 	err := service.ApplyService(&parameter)
 	if err != nil {
@@ -25,6 +26,7 @@ func Apply(c *gin.Context) {
 			Msg:  err.Error(),
 			Data: nil,
 		})
+		return
 	}
 	c.JSON(http.StatusOK, model.Response{
 		Code: model.Success,

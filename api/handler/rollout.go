@@ -17,6 +17,7 @@ func Rollout(c *gin.Context) {
 			Msg:  "【rollout参数不匹配】" + err.Error(),
 			Data: nil,
 		})
+		return
 	}
 	err := service.RolloutService(&parameter)
 	if err != nil {
@@ -25,10 +26,11 @@ func Rollout(c *gin.Context) {
 			Msg:  err.Error(),
 			Data: nil,
 		})
+		return
 	}
 	c.JSON(http.StatusOK, model.Response{
 		Code: model.Success,
 		Msg:  "【Rollout 成功】",
-		Data: "",
+		Data: nil,
 	})
 }
