@@ -14,7 +14,8 @@ RUN go mod download
 COPY . .
 
 # 编译命令改为指向正确的主程序位置
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -ldflags="-s -w" -a -o app ./cmd
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
+    go build -trimpath -ldflags="-s -w" -a -o app ./cmd/
 
 # 第二阶段：运行阶段
 FROM docker.donglizhiyuan.com/library/alpine:3.20
