@@ -1,9 +1,4 @@
 # jiangnanCD
-### operationType:
-- Apply : 0
-- Delete : 1
-- Rollout : 2
-- Get : 3
 ### resourceType:
 - Deployment : "Deployment"
 - StatefulSet : "StatefulSet"
@@ -19,10 +14,7 @@ Timeout: 的单位是分钟
 - Undo : 2
 ```json
 {
-  "Command": {
-    "operationType": 2,
-    "namespace": "default"
-  },
+  "namespace": "default",
   "resourceType": "Deployment",
   "resourceName": "spring-app",
   "state": 0,
@@ -33,10 +25,7 @@ Timeout: 的单位是分钟
 ## apply
 ```json
 {
-  "Command": {
-    "operationType": 0,
-    "namespace": "default"
-  },
+  "namespace": "default",
   "resourceType": "Deployment",
   "resourceName": "spring-app",
   "containerName": "spring-app",
