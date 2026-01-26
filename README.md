@@ -1,4 +1,10 @@
 # jiangnanCD
+通过apply和rollout接口在k8s中实现滚动升级
+## StatusCode
+Success : 0
+ParameterFail : 1
+ApplyFail : 2
+RolloutFail : 3
 ### resourceType:
 - Deployment : "Deployment"
 - StatefulSet : "StatefulSet"
@@ -32,3 +38,4 @@ Timeout: 的单位是分钟
   "image": "docker.donglizhiyuan.com/spring-app:v1.0.0"
 }
 ```
+
