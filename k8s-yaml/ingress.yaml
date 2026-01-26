@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dashboard-front-ingress
+  namespace: cd
+  annotations:
+    # TLS / cert-manager
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+
+    # 强制 HTTPS
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+
+    # HSTS
+    nginx.ingress.kubernetes.io/hsts: "true"
+    nginx.ingress.kubernetes.io/hsts-max-age: "31536000"
+    nginx.ingress.kubernetes.io/hsts-include-subdomains: "true"
+    nginx.ingress.kubernetes.io/hsts-preload: "true"
+
+    # 请求体大小限制
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+
+    # 缓存优化
+    nginx.ingress.kubernetes.io/expires: "1d"
+    nginx.ingress.kubernetes.io/cache-control: "public, max-age=86400"
+
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - dashboard.memnetai.com
+      secretName: dashboard-front-tls-cert
+  rules:
+    - host: dashboard.memnetai.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dashboard-front-svc
+                port:
+                  number: 80

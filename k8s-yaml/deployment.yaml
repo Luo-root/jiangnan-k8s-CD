@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-cd  # 部署名称，需唯一
+  namespace: cd
+spec:
+  replicas: 1  # 副本数
+  selector:
+    matchLabels:
+      app: k8s-cd  # 与模板标签一致
+  template:
+    metadata:
+      labels:
+        app: k8s-cd  # 用于关联Service
+    spec:
+      containers:
+        - name: k8s-cd  # 容器名称
+          image: docker.donglizhiyuan.com/library/k8s-cd:v1  # 镜像地址
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080  # 容器内部端口（前端通常用80）
+          # 资源限制（根据应用需求调整）
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: '1'
+              memory: 2Gi
+          # 健康检查（Spring Boot应用可使用actuator端点）
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
