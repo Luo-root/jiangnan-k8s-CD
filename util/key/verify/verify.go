@@ -19,6 +19,8 @@ func Verify() gin.HandlerFunc {
 				Msg:  "【密钥读取异常】" + err.Error(),
 				Data: nil,
 			})
+			// 当在中间件或处理器中调用 c.Abort() 后，Gin 会停止执行当前请求后续的所有中间件和处理器函数
+			c.Abort()
 			return
 		}
 		if key != k {
@@ -27,7 +29,9 @@ func Verify() gin.HandlerFunc {
 				Msg:  "【密钥校验失败】",
 				Data: nil,
 			})
+			c.Abort()
 			return
 		}
+		c.Next()
 	}
 }
