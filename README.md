@@ -38,4 +38,7 @@ Timeout: 的单位是分钟
   "image": "docker.donglizhiyuan.com/spring-app:v1.0.0"
 }
 ```
-
+### 构建dockerfile
+```bash
+docker build -t docker.donglizhiyuan.com/library/k8s-cd:v1 .
+```

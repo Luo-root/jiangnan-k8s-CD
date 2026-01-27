@@ -15,7 +15,7 @@ func Verify() gin.HandlerFunc {
 		k, err := file.ReadFile(file.KeyPath)
 		if err != nil {
 			c.JSON(http.StatusOK, model.Response{
-				Code: model.ParameterFail,
+				Code: model.ReadFail,
 				Msg:  "【密钥读取异常】" + err.Error(),
 				Data: nil,
 			})
@@ -23,7 +23,7 @@ func Verify() gin.HandlerFunc {
 		}
 		if key != k {
 			c.JSON(http.StatusOK, model.Response{
-				Code: model.ParameterFail,
+				Code: model.KeyFail,
 				Msg:  "【密钥校验失败】",
 				Data: nil,
 			})

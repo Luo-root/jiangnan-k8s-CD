@@ -7,4 +7,6 @@ const (
 	ParameterFail
 	ApplyFail
 	RolloutFail
+	KeyFail
+	ReadFail
 )

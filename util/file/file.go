@@ -10,7 +10,10 @@ const KeyPath = "public/key.txt"
 func WriteFile(filePath string, content string) error {
 	// 0644
 	err := os.WriteFile(filePath, []byte(content), 0644)
-	return fmt.Errorf("【写入文件失败】: %v", err)
+	if err != nil {
+		return fmt.Errorf("【写入文件失败】: %v", err)
+	}
+	return nil
 }
 
 func ReadFile(filePath string) (string, error) {
