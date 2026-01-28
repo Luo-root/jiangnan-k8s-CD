@@ -5,7 +5,9 @@ Success : 0
 ParameterFail : 1
 ApplyFail : 2
 RolloutFail : 3
-### resourceType:
+## Headers
+- Authorization: "<key>"
+## resourceType:
 - Deployment : "Deployment"
 - StatefulSet : "StatefulSet"
 - DaemonSet : "DaemonSet"
@@ -19,11 +21,24 @@ Timeout: 的单位是分钟
 - Status : 1
 - Undo : 2
 ```json
-
+{
+  "namespace": "memnetai",
+  "resourceType": "Deployment",
+  "resourceName": "docs",
+  "state": 0,
+  "timeout": 10,
+  "revision": null
+}
 ```
 ## apply
 ```json
-
+{
+  "namespace": "memnetai",
+  "resourceType": "Deployment",
+  "resourceName": "docs",
+  "containerName": "docs",
+  "image": "<image>"
+}
 ```
 ### 构建dockerfile
 
@@ -61,7 +76,7 @@ docker build -t docker.donglizhiyuan.com/library/k8s-cd:v1 .
   "resourceType": "Deployment",
   "resourceName": "spring-app",
   "containerName": "spring-app",
-  "image": "docker.donglizhiyuan.com/spring-app:v1.0.0"
+  "image": "<image>"
 }
 ```
 
@@ -125,7 +140,16 @@ docker build -t docker.donglizhiyuan.com/library/k8s-cd:v1 .
 
 ### 更新镜像
 ```bash
-curl -X POST http://localhost:8080/apply?Authorization=<key> -H "Content-Type: application/json" -d '{ "namespace": "default", "resourceType": "Deployment", "resourceName": "my-app", "containerName": "my-container", "image": "nginx:latest" }'
+curl --location --request POST 'http://localhost:8080/apply' \
+--header 'Authorization: jQlvvNLjSSPOjdS0iRoFijfMSjDeA7VE' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "namespace": "default",
+  "resourceType": "Deployment",
+  "resourceName": "spring-app",
+  "containerName": "spring-app",
+  "image": "<image>"
+}'
 ```
 ### 检查滚动更新状态
 ```bash
@@ -133,7 +157,17 @@ curl -X POST http://localhost:8080/rollout?Authorization=<key> -H "Content-Type:
 ```
 ### 重启 Deployment
 ```bash
-curl -X POST http://localhost:8080/rollout?Authorization=<key> -H "Content-Type: application/json" -d '{ "namespace": "default", "resourceType": "Deployment", "resourceName": "my-app", "state": 0, "timeout": 0, "revision": 0 }'
+curl --location --request POST 'http://localhost:8080/rollout' \
+--header 'Authorization: SwYXmHl5ZInmRmYHcl0W0nCNkZJoTb0u' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "namespace": "memnetai",
+  "resourceType": "Deployment",
+  "resourceName": "docs",
+  "state": 0,
+  "timeout": 10,
+  "revision": null
+}'
 ```
 ## 技术栈
 
